@@ -8,7 +8,7 @@ const passport = require('passport');
 const cors = require('cors');
 
 // routes
-const indexRouter = require('./routes/index');
+const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
 
@@ -35,7 +35,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/posts', indexRouter);
+app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/posts/:post_id/comments', commentsRouter);
 

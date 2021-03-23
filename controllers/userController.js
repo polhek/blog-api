@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const utils = require('../utils/utils');
+const post = require('../models/post');
 
 exports.register_POST = (req, res, next) => {
   const { username, password } = req.body;
@@ -9,14 +10,13 @@ exports.register_POST = (req, res, next) => {
     if (err) {
       return res.status(400).json({
         success: false,
-        msg: err,
+        msg: err.message,
       });
     }
     if (user) {
       return res.status(400).json({
         success: false,
         msg: 'User with this name already exists!',
-        err: err,
       });
     }
     bcrypt.hash(password, 10, (err, hashedPassword) => {

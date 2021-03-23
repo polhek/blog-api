@@ -10,6 +10,7 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
+// JWT token test route
 router.get(
   '/protected',
   passport.authenticate('jwt', { session: false }),
