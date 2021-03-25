@@ -1,9 +1,12 @@
 const Post = require('../models/post');
 const async = require('async');
+const post = require('../models/post');
+const Comment = require('../models/comment');
 
-exports.allPosts_GET = (req, res, next) => {
+exports.allPosts_GET = (req, res) => {
   Post.find()
-    .populate('author')
+    .populate('author', '-password')
+    .populate('comments')
     .sort('-createdAt')
     .exec((err, posts) => {
       if (err) {
@@ -84,12 +87,13 @@ exports.editSpecifiedPost_PUT = (req, res, next) => {
   );
 };
 
+//? S
 exports.deleteSpecifiedPost_DELETE = (req, res) => {
-  Post.findByIdAndDelete({ _id: req.params.id }, (err, deletedPost) => {
+  Post.findByIdAndDelete(req.params.id, (err, deletedPost) => {
     if (err) {
       return res.status(409).json({ success: false, msg: err.message });
     } else {
-      res.status(204).json({
+      res.status(200).json({
         success: true,
         msg: 'Post deleted!',
         post: deletedPost,
