@@ -5,10 +5,9 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const User = require('../models/user');
 require('dotenv').config();
 
-const opts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.secretOrKey,
-};
+const opts = {};
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
 
 const strategy = new JwtStrategy(opts, (payload, done) => {
   User.findOne({ _id: payload.sub })
