@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
+opts.secretOrKey = process.env.secretOrKey;
 
 const strategy = new JwtStrategy(opts, (payload, done) => {
   User.findOne({ _id: payload.sub })
