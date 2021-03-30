@@ -6,6 +6,8 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const cors = require('cors');
+const compression = require('compression');
+const helmet = require('helmet');
 
 // routes
 const postsRouter = require('./routes/posts');
@@ -26,8 +28,10 @@ require('./models/user');
 
 require('./passport/passport')(passport);
 
+app.use(compression());
 app.use(passport.initialize());
 
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
