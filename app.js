@@ -14,13 +14,8 @@ const postsRouter = require('./routes/posts');
 const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
 
-const corsOptions = {
-  origin: 'localhost:3000',
-  optionsSuccessStatus: 200,
-};
-
 const app = express();
-app.use(cors(corsOptions));
+app.use(cors());
 // mongoose connection!
 const mongoDB_url = process.env.MONGO_URL;
 const mongoDB = process.env.MONGODB_URI || mongoDB_url;
