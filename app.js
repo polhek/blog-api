@@ -15,7 +15,7 @@ const usersRouter = require('./routes/users');
 const commentsRouter = require('./routes/comments');
 
 const app = express();
-
+app.use(cors());
 // mongoose connection!
 const mongoDB_url = process.env.MONGO_URL;
 const mongoDB = process.env.MONGODB_URI || mongoDB_url;
@@ -35,7 +35,7 @@ app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
