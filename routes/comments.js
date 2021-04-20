@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const commentsController = require('../controllers/commentsController');
+const passport = require('passport');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -9,6 +10,10 @@ router.get('/', function (req, res, next) {
 
 router.post('/create', commentsController.createNewComment_POST);
 
-router.delete('/:id/delete', commentsController.deleteComment_DELETE);
+router.delete(
+  '/:id/delete',
+  passport.authenticate('jwt', { session: false }),
+  commentsController.deleteComment_DELETE
+);
 
 module.exports = router;
