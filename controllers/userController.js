@@ -81,3 +81,7 @@ exports.login_POST = async (req, res, next) => {
       next(err);
     });
 };
+
+exports.profile_GET = (req, res, next) => {
+  return res.json(req.user);
+};

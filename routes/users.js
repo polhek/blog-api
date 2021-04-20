@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
 // JWT token test route
 router.get(
   '/protected',
-  passport.authenticate('jwt', { session: false }),
+
   (req, res) => {
     res.status(200).json({
       success: true,
@@ -25,5 +25,11 @@ router.get(
 router.post('/login', userController.login_POST);
 
 router.post('/register', userController.register_POST);
+
+router.get(
+  '/profile',
+  passport.authenticate('jwt', { session: false }),
+  userController.profile_GET
+);
 
 module.exports = router;
